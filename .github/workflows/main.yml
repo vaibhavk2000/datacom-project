@@ -1,0 +1,22 @@
+name: Team Production CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Utilizes GitHub system variables as requested by Samuel
+      - name: Run Environment Check
+        run: |
+          echo "Pipeline triggered by: ${{ github.actor }}"
+          echo "Current Git branch: ${{ github.ref }}"
